@@ -53,7 +53,7 @@ const Advogados = () => {
                     >
                         <Grid item xs={6} md={4}>
                             <Box className="features__content">
-                                <i class='bx bx-edit'></i>
+                                <i className='bx bx-edit'></i>
                                 <h4>Faca o seu cadastro</h4>
                                 <p>Criar o seu perfil profissional e sua especialidade
                                 </p>
@@ -61,14 +61,14 @@ const Advogados = () => {
                         </Grid>  
                         <Grid item xs={6} md={4}>
                             <Box className="features__content">
-                                <i class='bx bx-user-voice'></i>                                
+                                <i className='bx bx-user-voice'></i>                                
                                 <h4>Rede de advogados</h4>
                                 <p>Procure o profissional por cidade ou por area de especialacao</p>
                             </Box>
                         </Grid>   
                         <Grid item xs={6} md={4}>
                              <Box className="features__content">
-                                <i class='bx bx-desktop' ></i>
+                                <i className='bx bx-desktop' ></i>
                                 <h4>Trabalho online e recomendacoes</h4>
                                 <p>Filtro das opcoes segundo a sua experiencia profissional e areas de interesse
                                 </p>

@@ -9,28 +9,28 @@ import Lastest from "./../components/Lastest.js"
 import Grid from '@mui/material/Grid';
 import Popular from "./../components/Popular.js"
 const PopularArray=[
-    {"title":"Termo de realizacao de estagio",
+    {"title":"Contrato de compra e venda",
     "thumb":"img/1.png",
     "ultimaRevisao":"12/03/2021",
     "tamanho":"1 pagina",
     "avaliacao":"4.9",
     "votos":"230"},
 
-    {"title":"Contrato de Uniao Estavel",
+    {"title":"Contrato de prestação de serviços",
     "thumb":"img/1.png",
     "ultimaRevisao":"12/03/2021",
     "tamanho":"1 pagina",
     "avaliacao":"4.9",
     "votos":"230"},
 
-    {"title":"Carta de demissao por causa justa",
+    {"title":"Contrato de parceria",
     "thumb":"img/1.png",
     "ultimaRevisao":"12/03/2021",
     "tamanho":"1 pagina",
     "avaliacao":"4.9",
     "votos":"230"},
 
-    {"title":"Contrato de compra e venda de imovel",
+    {"title":"Contrato de trabalho",
     "thumb":"img/1.png",
     "ultimaRevisao":"12/03/2021",
     "tamanho":"1 pagina",
@@ -77,7 +77,7 @@ const ContractsList = () => {
             <Box>
                 <Search></Search>
             </Box>
-            <h1 className="heading">Mais Populares</h1>
+            <h1 className="heading">Disponíveis</h1>
             <Box> 
                 <Grid
                     container           

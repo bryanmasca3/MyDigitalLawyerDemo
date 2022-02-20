@@ -59,5 +59,14 @@ export default StyleSheet.create({
     height:"2px",
     backgroundColor:"#000",
     marginBottom:"5px"
+  },
+  highlighted:{
+    backgroundColor:"#fff",
+  },
+  highlightedBefore:{
+    backgroundColor:"#fad15a",
+  },
+  highlightedAfter:{
+    backgroundColor:"#77d4da"
   }
 })

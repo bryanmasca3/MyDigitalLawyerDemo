@@ -13,17 +13,17 @@ const Header = () => {
         className="header__content"
         >
         <Grid item xs={6} md={1} className="header__content-social">
-            <i class='bx bxl-facebook-square'></i>
-            <i class='bx bxl-instagram' ></i>
-            <i class='bx bxl-twitter' ></i>
-            <i class='bx bxl-youtube' ></i>
+            <i className='bx bxl-facebook-square'></i>
+            <i className='bx bxl-instagram' ></i>
+            <i className='bx bxl-twitter' ></i>
+            <i className='bx bxl-youtube' ></i>
         </Grid>
         <Grid item xs={6} md={8}/>
         
         <Grid item xs={6} md={2} className="header__content-language">
            <nav>               
                <a>Contato</a>
-               <a><i class='bx bx-search' ></i></a>
+               <a><i className='bx bx-search' ></i></a>
                <a>POR</a>
                <a>ENG</a>
            </nav>
@@ -47,7 +47,7 @@ const Header = () => {
             <Link  className="menu-item" to="/contractList">Contratos</Link>
             <Link  className="menu-item" to="/advogados">Advogados</Link>
             <a className="menu-item" >Equipe</a>
-            <i class='bx bxs-user-rectangle' ></i>
+            <i className='bx bxs-user-rectangle' ></i>
         </nav>
         </Grid>
     

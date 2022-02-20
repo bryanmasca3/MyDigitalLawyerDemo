@@ -27,7 +27,7 @@ const Home = () => {
                     >
                         <Grid item xs={6} md={4}>
                             <Box className="features__content">
-                            <i class='bx bxs-keyboard'></i>
+                            <i className='bx bxs-keyboard'></i>
                                 <h4>Faca o seu contrato em poucos minutos</h4>
                                 <p>Basta informar os dados basicos
                                     no nosso formulario
@@ -36,14 +36,14 @@ const Home = () => {
                         </Grid>  
                         <Grid item xs={6} md={4}>
                             <Box className="features__content">
-                                <i class='bx bx-desktop' ></i>
+                                <i className='bx bx-desktop' ></i>
                                 <h4>DE forma 100% digital</h4>
                                 <p>O documeno e gerado em instantes</p>
                             </Box>
                         </Grid>   
                         <Grid item xs={6} md={4}>
                              <Box className="features__content">
-                                <i class='bx bxs-user' ></i>
+                                <i className='bx bxs-user' ></i>
                                 <h4>Averiguado por especialistas</h4>
                                 <p>Con a seguranca da validacao return por
                                     professionais especializados

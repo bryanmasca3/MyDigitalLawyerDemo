@@ -6,137 +6,244 @@ import Search from "./../components/Search.js"
 import Othermodel from "./../components/Othermodel"
 
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+
+
 import './../App.css';
-import Grid from '@mui/material/Grid';
+
 import Preview from '../PDF/Preview.js';
+
+import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Box from '@mui/material/Box';
+
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import CondicionesEntrega from '../components/compraVenta/CondicionesEntrega.js'
+import Contratado from '../components/compraVenta/Contratado.js'
+import Contratante from '../components/compraVenta/Contratante.js'
+import DatosBancarios from '../components/compraVenta/DatosBancarios.js'
+import FormaPago from '../components/compraVenta/FormaPago.js'
+import Foro from '../components/compraVenta/Foro.js'
+import ObjectContrato from '../components/compraVenta/ObjectContrato.js'
+import Precio from '../components/compraVenta/Precio.js'
 
 const Contract = () => {
-    const [dataState, setdataState] = useState({})
-      const formik = useFormik({
+
+
+    const [dataContratado, setdataContratado] = useState(null)
+    const [dataContratante, setdataContratante] = useState(null)    
+    const [dataCondicionEntrega, setdataCondicionEntrega] = useState(null)
+    const [dataObjecto, setdataObjecto] = useState(null)
+    const [dataPrecio, setdataPrecio] = useState(null)
+    const [dataFormaPago, setdataFormaPago] = useState(null)
+    const [dataDatosBanco, setdataDatosBanco] = useState(null)
+    const [dataForo, setdataForo] = useState(null)
+
+    const [value, setValue] = useState('1');
+
+    const [buttonactivate, setbuttonactivate] = useState(false);
+
+    const handleChangeTab = (event, newValue) => {
+      setValue(newValue);
+    };     
+
+    const formikForo= useFormik({
+        initialValues: {                        
+            foro: ''
+        },
+        validationSchema: Yup.object({                                  
+            foro: Yup.string()
+            .max(50, 'Must be 50 characters or less')
+            .required('Required')                                
+        }),
+        onSubmit: values => {           
+            setdataForo(values)
+            setbuttonactivate(true)       
+        }
+    }) 
+    const formikDatosBanco = useFormik({
+        initialValues: {                        
+            banco: '',
+            agencia: '',
+            conta: '',
+            beneficiario: '',
+            cpf: '',
+        },
+        validationSchema: Yup.object({
+                    
+            banco: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            agencia: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            conta: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            beneficiario: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            cpf: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            
+            
+        }),
+        onSubmit: values => {           
+            setdataDatosBanco(values)
+            setValue("8")         
+        }
+    }) 
+    const formikFormaPago = useFormik({
+        initialValues: {
+                
+            prestacoes: '',
+            datapagamento: '',
+            formapagamento: '',
+
+        },
+        validationSchema: Yup.object({          
+            prestacoes: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            datapagamento: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),
+            formapagamento: Yup.string()
+            .max(20, 'Must be 20 characters or less')
+            .required('Required'),                        
+        }),
+        onSubmit: values => {           
+            setdataFormaPago(values)
+            setValue("7")       
+        }
+    }) 
+
+    const formikPrecio = useFormik({
+        initialValues: {
+            preco: '',  
+        },
+        validationSchema: Yup.object({          
+            preco: Yup.string()
+            .matches(/^[0-9]+\,[0-9]+\.[0-9]{2}$/, "Ex: 50,20.00")
+            .required('Required'),  
+            
+        }),
+        onSubmit: values => {           
+            setdataPrecio(values)
+            setValue("6")           
+        }
+    }) 
+    const formikCondicionEntrega = useFormik({
+        initialValues: {
+            dia: new Date(),
+            horario: new Date(),
+            local: '', 
+        },
+        validationSchema: Yup.object({
+          
+            dia: Yup.date()
+            .default(() => new Date())                     
+            .required('Required'),
+            horario: Yup.string()
+            .default(() => new Date())
+            .required('Required'),                   
+            local: Yup.string()
+            .max(30, 'Must be 30 characters or less')
+            .required('Required'),  
+            
+        }),
+        onSubmit: values => {           
+            setdataCondicionEntrega(values)
+            setValue("5")         
+        }
+    }) 
+    const formikObjectoContrato = useFormik({
+        initialValues: {
+            objeto: '',   
+        },
+        validationSchema: Yup.object({
+            objeto: Yup.string()
+            .max(50, 'Must be 50 characters or less')
+            .required('Required'),  
+        }),
+        onSubmit: values => {           
+            setdataObjecto(values)
+            setValue("4")        
+        }
+    }) 
+    const formikContratante = useFormik({
+        initialValues: {
+            tenome: '',
+            terg: '',
+            tecpf: '',   
+            teendereco: '',
+            teemail: '',
+            tetelefone: '',
+
+        },
+        validationSchema: Yup.object({
+            tenome: Yup.string()
+            .matches(/^([a-z]+\s[a-z]+)+$/, "Ex: Carlos Maximiano")
+            .max(30, 'Must be 30 characters or less')
+            .required('Required'),
+            terg: Yup.string()
+            .matches(/^[0-9]{6}\-[a-z]{2}$/, "Ex: 187876-MG")
+            .required('Required'),
+            tecpf: Yup.string()            
+            .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Ex: XXX.XXX.XXX-XX")
+            .required('Required'),
+            teendereco: Yup.string()
+            .max(50, 'Must be 50 characters or less')
+            .required('Required'),
+            teemail: Yup.string()
+            .email('Ex: nombre@gmail.com')
+            .required('Required'),
+            tetelefone: Yup.string()
+            .matches(/^\([0-9]{2}\)[0-9]{4}\-[0-9]{4}$/, "Ex: (11)4184-8994")
+            .required('Required')
+        }),
+        onSubmit: values => {           
+            setdataContratante(values)
+            setValue("3")      
+        }
+    }) 
+    const formikContratado = useFormik({
         initialValues: {
             donome: '',
             docpnj: '',
             doendereco: '',
             doemail:"",
             dotelefone:"",
-
-            tenome: '',
-            terg: '',
-            tecpf: '',   
-            teendereco: '',
-            teemail: '',
-            tetelefone: '',  
-
-            objeto: '',   
-
-            dia: '',
-            horario: '',
-            local: '',  
-            preco: '',  
-
-            prestacoes: '',
-            datapagamento: '',
-            formapagamento: '', 
-
-            banco: '',
-            agencia: '',
-            conta: '',
-            beneficiario: '',
-            cpf: '',     
-            foro: ''
         },
         validationSchema: Yup.object({
             donome: Yup.string()
-            .max(10, 'Must be 15 characters or less')
+            .matches(/^([a-z]+\s[a-z]+)+$/, "Ex: Bruna Curci")
+            .max(30, 'Must be 30 characters or less')
             .required('Required'),
             docpnj: Yup.string()
-            .max(5, 'Must be 20 characters or less')
+            .matches(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/(0001)\-[0-9]{2}$/, "Ex: XX.XXX.XXX/0001-XX")
             .required('Required'),
             doendereco: Yup.string()
-            .max(10, 'Must be 20 characters or less')
+            .max(50, 'Must be 50 characters or less')
             .required('Required'),
             doemail: Yup.string()
-            .max(10, 'Must be 20 characters or less')
+            .email('Ex: nombre@gmail.com')
             .required('Required'),
             dotelefone: Yup.string()
-            .max(22, 'Must be 20 characters or less')
-            .required('Required'),
-        
-         
-            tenome: Yup.string()
-            .max(10, 'Must be 15 characters or less')
-            .required('Required'),
-            terg: Yup.string()
-            .max(5, 'Must be 20 characters or less')
-            .required('Required'),
-            tecpf: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-            teendereco: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-            teemail: Yup.string()
-            .max(22, 'Must be 20 characters or less')
-            .required('Required'),
-            tetelefone: Yup.string()
-            .max(10, 'Must be 15 characters or less')
-            .required('Required'),
-
-            objeto: Yup.string()
-            .max(5, 'Must be 20 characters or less')
-            .required('Required'),
-            dia: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-            horario: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-            local: Yup.string()
-            .max(22, 'Must be 20 characters or less')
-            .required('Required'),
-            preco: Yup.string()
-            .max(22, 'Must be 20 characters or less')
-            .required('Required'),
-            
-            prestacoes: Yup.string()
-            .max(10, 'Must be 15 characters or less')
-            .required('Required'),
-            datapagamento: Yup.string()
-            .max(5, 'Must be 20 characters or less')
-            .required('Required'),
-            formapagamento: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-
-            banco: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-            agencia: Yup.string()
-            .max(22, 'Must be 20 characters or less')
-            .required('Required'),
-            conta: Yup.string()
-            .max(10, 'Must be 15 characters or less')
-            .required('Required'),
-            beneficiario: Yup.string()
-            .max(5, 'Must be 20 characters or less')
-            .required('Required'),
-            cpf: Yup.string()
-            .max(10, 'Must be 20 characters or less')
-            .required('Required'),
-
-            foro: Yup.string()
-            .max(10, 'Must be 20 characters or less')
+            .matches(/^\([0-9]{2}\)[0-9]{4}\-[0-9]{4}$/, "Ex: (11)4184-8994")
             .required('Required')
-
         }),
         onSubmit: values => {           
-            setdataState(values)       
+            setdataContratado(values)
+            setValue("2")       
         },
-      });
+        enableReinitialize:true
+      });    
+
     return (
         <>
         <Box>
@@ -153,271 +260,49 @@ const Contract = () => {
                     spacing={4}        
                     >                
                         <Grid item xs={6} md={6}>
-                           <Box className="contract__content-data">
-                           <form onSubmit={formik.handleSubmit}>
-                                <h2>CONTRATADO</h2>
-                                <Box className="contract__content-box">
-                                    <TextField  name="donome"
-                                                className="contract__box-input"
-                                                label="NOME" 
-                                                id="donome"
-                                                variant="filled"
-                                                value={formik.values.donome}
-                                                onChange={formik.handleChange}
-                                                error={formik.touched.donome && Boolean(formik.errors.donome)}
-                                                helperText={formik.touched.donome && formik.errors.donome}/>
-                                    <TextField name="docpnj"
-                                                className="contract__box-input"
-                                                label="CNPJ"
-                                                variant="filled"
-                                                id="docpnj"
-                                                value={formik.values.docpnj}
-                                                onChange={formik.handleChange}
-                                                error={formik.touched.docpnj && Boolean(formik.errors.docpnj)}
-                                                helperText={formik.touched.docpnj && formik.errors.docpnj}/>
-                                    <TextField name="doendereco"
-                                               className="contract__box-input"
-                                               label="ENDEREÇO" 
-                                               variant="filled"  
-                                               id="doendereco"
-                                               value={formik.values.doendereco}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.doendereco && Boolean(formik.errors.doendereco)}
-                                               helperText={formik.touched.doendereco && formik.errors.doendereco}/>
-                                    <TextField name="doemail"
-                                               className="contract__box-input"
-                                               label="EMAIL" 
-                                               variant="filled"  
-                                               id="doemail"
-                                               value={formik.values.doemail}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.doemail && Boolean(formik.errors.doemail)}
-                                               helperText={formik.touched.doemail && formik.errors.doemail}/>
-                                    <TextField name="dotelefone" 
-                                               className="contract__box-input"
-                                               label="TELEFONE"
-                                               variant="filled"
-                                               id="dotelefone"
-                                               value={formik.values.dotelefone}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.dotelefone && Boolean(formik.errors.dotelefone)}
-                                               helperText={formik.touched.dotelefone && formik.errors.dotelefone}/>
-                                </Box>
+                           <Box className="contract__content-data"  style={{border:"1px solid #e8e8e8"}}>
+                          
+                             <TabContext value={value}
                                
-                                <h2>CONTRATANTE</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="tenome" 
-                                               className="contract__box-input" 
-                                               id="tenome" 
-                                               label="NOME" 
-                                               variant="filled"  
-                                               value={formik.values.tenome}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.tenome && Boolean(formik.errors.tenome)}
-                                               helperText={formik.touched.tenome && formik.errors.tenome}/>
-                                    <TextField name="terg"
-                                               className="contract__box-input"
-                                               id="terg"
-                                               label="RG"
-                                               variant="filled"
-                                               value={formik.values.terg}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.terg && Boolean(formik.errors.terg)}
-                                               helperText={formik.touched.terg && formik.errors.terg}/>
-                                    <TextField name="tecpf"
-                                               className="contract__box-input"
-                                               id="tecpf"
-                                               label="CPF" 
-                                               variant="filled"  
-                                               value={formik.values.tecpf}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.tecpf && Boolean(formik.errors.tecpf)}
-                                               helperText={formik.touched.tecpf && formik.errors.tecpf}/>
-                                    <TextField name="teendereco" 
-                                               className="contract__box-input" 
-                                               id="teendereco" 
-                                               label="ENDEREÇO" 
-                                               variant="filled"  
-                                               value={formik.values.teendereco}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.teendereco && Boolean(formik.errors.teendereco)}
-                                               helperText={formik.touched.teendereco && formik.errors.teendereco}/>
-                                    <TextField name="teemail" 
-                                               className="contract__box-input" 
-                                               id="teemail" 
-                                               label="EMAIL" 
-                                               variant="filled"  
-                                               value={formik.values.teemail}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.teemail && Boolean(formik.errors.teemail)}
-                                               helperText={formik.touched.teemail && formik.errors.teemail}/>
-                                    <TextField name="tetelefone"
-                                               className="contract__box-input" 
-                                               id="tetelefone" 
-                                               label="TELEFONE" 
-                                               variant="filled"  
-                                               value={formik.values.tetelefone}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.tetelefone && Boolean(formik.errors.tetelefone)}
-                                               helperText={formik.touched.tetelefone && formik.errors.tetelefone}/>
+                              >
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <TabList onChange={handleChangeTab} aria-label="lab API tabs example" variant="scrollable"
+                               scrollButtons>
+                                    <Tab label="CONTRATADO" value="1" />
+                                    <Tab label="CONTRATANTE" value="2" disabled={dataContratado?false:true}/>
+                                    <Tab label="DO OBJETO DO CONTRATO" value="3"  disabled={dataContratante?false:true}/>
+                                    <Tab label="CONDIÇÕES DA ENTREGA" value="4"  disabled={dataObjecto?false:true}/>
+                                    <Tab label="DO PREÇO" value="5"  disabled={dataCondicionEntrega?false:true}/>
+                                    <Tab label="DA FORMA DE PAGAMENTO" value="6"  disabled={dataPrecio?false:true}/>
+                                    <Tab label="DADOS BANCÁRIOS" value="7"  disabled={dataFormaPago?false:true}/>
+                                    <Tab label="FORO" value="8"  disabled={dataDatosBanco?false:true}/>
+                                    </TabList>
                                 </Box>
-                                <h2>DO OBJETO DO CONTRATO</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="objeto"
-                                               className="contract__box-input" 
-                                               id="objeto" 
-                                               label="OBJETO" 
-                                               variant="filled"  
-                                               value={formik.values.objeto}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.objeto && Boolean(formik.errors.objeto)}
-                                               helperText={formik.touched.objeto && formik.errors.objeto}/>
-                                </Box>
-                                <h2>CONDIÇÕES DA ENTREGA</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="dia" 
-                                               className="contract__box-input" 
-                                               id="dia" 
-                                               label="DIA" 
-                                               variant="filled"  
-                                               value={formik.values.dia}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.dia && Boolean(formik.errors.dia)}
-                                               helperText={formik.touched.dia && formik.errors.dia}/>
-                                    <TextField name="horario" 
-                                               className="contract__box-input" 
-                                               id="horario" 
-                                               label="HORÁRIO" 
-                                               variant="filled"  
-                                               value={formik.values.horario}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.horario && Boolean(formik.errors.horario)}
-                                               helperText={formik.touched.horario && formik.errors.horario}/>
-                                    <TextField name="local" 
-                                               className="contract__box-input" 
-                                               id="local" 
-                                               label="LOCAL" 
-                                               variant="filled"  
-                                               value={formik.values.local}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.local && Boolean(formik.errors.local)}
-                                               helperText={formik.touched.local && formik.errors.local}/>
-                                </Box>
-                                <h2> DOPREÇO</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="preco"
-                                               className="contract__box-input" 
-                                               id="preco" 
-                                               label="PREÇO" 
-                                               variant="filled"  
-                                               value={formik.values.preco}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.preco && Boolean(formik.errors.preco)}
-                                               helperText={formik.touched.preco && formik.errors.preco}/> 
-                                </Box>                                                             
-                                <h2>FORMA DE PAGAMENTO</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="prestacoes" 
-                                               className="contract__box-input"
-                                               id="prestacoes" 
-                                               label="Nº DE PRESTAÇÕES" 
-                                               variant="filled"  
-                                               value={formik.values.prestacoes}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.prestacoes && Boolean(formik.errors.prestacoes)}
-                                               helperText={formik.touched.prestacoes && formik.errors.prestacoes}/>
-                                    <TextField name="datapagamento" 
-                                               className="contract__box-input"
-                                               id="datapagamento" 
-                                               label="DATA DE PAGAMENTO PRESTAÇÃO" 
-                                               variant="filled"  
-                                               value={formik.values.datapagamento}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.datapagamento && Boolean(formik.errors.datapagamento)}
-                                               helperText={formik.touched.datapagamento && formik.errors.datapagamento}/>
-                                    <TextField name="formapagamento" 
-                                               className="contract__box-input"
-                                               id="formapagamento" 
-                                               label="FORMA DE PAGAMENTO" 
-                                               variant="filled"  
-                                               value={formik.values.formapagamento}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.formapagamento && Boolean(formik.errors.formapagamento)}
-                                               helperText={formik.touched.formapagamento && formik.errors.formapagamento}/>
-                                </Box>                               
-                                <h2>DADOS BANCÁRIOS</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="banco" 
-                                               className="contract__box-input"
-                                               id="banco" 
-                                               label="BANCO" 
-                                               variant="filled"  
-                                               value={formik.values.banco}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.banco && Boolean(formik.errors.banco)}
-                                               helperText={formik.touched.banco && formik.errors.banco}/>
-                                    <TextField name="agencia" 
-                                               className="contract__box-input"
-                                               id="agencia" 
-                                               label="AGÊNCIA" 
-                                               variant="filled"  
-                                               value={formik.values.agencia}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.agencia && Boolean(formik.errors.agencia)}
-                                               helperText={formik.touched.agencia && formik.errors.agencia}/>
-                                    <TextField name="conta" 
-                                               className="contract__box-input"
-                                               id="conta" 
-                                               label="CONTA/CORRENTE" 
-                                               variant="filled"  
-                                               value={formik.values.conta}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.conta && Boolean(formik.errors.conta)}
-                                               helperText={formik.touched.conta && formik.errors.conta}/>
-                                    <TextField name="beneficiario" 
-                                               className="contract__box-input"
-                                               id="beneficiario" 
-                                               label="BENEFICIÁRIO" 
-                                               variant="filled"  
-                                               value={formik.values.beneficiario}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.beneficiario && Boolean(formik.errors.beneficiario)}
-                                               helperText={formik.touched.beneficiario && formik.errors.beneficiario}/>
-                                    <TextField name="cpf" 
-                                               className="contract__box-input"
-                                               id="cpf" 
-                                               label="CPF/CNPJ" 
-                                               variant="filled"  
-                                               value={formik.values.cpf}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.cpf && Boolean(formik.errors.cpf)}
-                                               helperText={formik.touched.cpf && formik.errors.cpf}/>
-                                </Box>       
-                                <h2>FORO</h2>
-                                <Box className="contract__content-box">
-                                    <TextField name="foro" 
-                                               className="contract__box-input"
-                                               id="foro" 
-                                               label="FORO" 
-                                               variant="filled"  
-                                               value={formik.values.foro}
-                                               onChange={formik.handleChange}
-                                               error={formik.touched.foro && Boolean(formik.errors.foro)}
-                                               helperText={formik.touched.foro && formik.errors.foro}/>
-                                </Box>  
-                                <Box className="contract__content-box">
-                                    <button className="othermodel__main-buttons send" type="submit">Proxima etapa </button>
-                                </Box>  
-                                <Box className="contract__content-box">
-                                    <a className="contract__box-save">Salvar e continuar depois</a>
-                               </Box>                                    
-                                </form>
+                                <TabPanel value="1"><Contratado formik={formikContratado}></Contratado></TabPanel>
+                                <TabPanel value="2"><Contratante formik={formikContratante}></Contratante></TabPanel>
+                                <TabPanel value="3"><ObjectContrato formik={formikObjectoContrato}></ObjectContrato></TabPanel>
+                                <TabPanel value="4"><CondicionesEntrega formik={formikCondicionEntrega}></CondicionesEntrega></TabPanel>
+                                <TabPanel value="5"><Precio formik={formikPrecio}></Precio></TabPanel>
+                                <TabPanel value="6"><FormaPago formik={formikFormaPago}></FormaPago></TabPanel>
+                                <TabPanel value="7"><DatosBancarios formik={formikDatosBanco}></DatosBancarios></TabPanel>
+                                <TabPanel value="8"><Foro formik={formikForo} ></Foro></TabPanel>
+                             </TabContext>                            
                            </Box>
-                           
+                         
+
+  
                         </Grid>                                                        
                         <Grid item xs={6} md={6}>
                             <Box className="contract-pdf">
-                                <Preview  data={dataState}></Preview>
+                                {<Preview   dataContratado={dataContratado}
+                                            dataContratante={dataContratante}
+                                            dataObjecto={dataObjecto}
+                                            dataCondicionEntrega={dataCondicionEntrega}
+                                            dataPrecio={dataPrecio}
+                                            dataFormaPago={dataFormaPago}
+                                            dataDatosBanco={dataDatosBanco}
+                                            dataForo={dataForo}
+                                            activate={buttonactivate}></Preview>}
                             </Box>                            
                         </Grid>                                                        
               

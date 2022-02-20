@@ -18,17 +18,17 @@ const Lastest = ({lastest}) => {
                 </div>
                 <div className="box">
                     <h5>Formatos:</h5>
-                    <div><i class='bx bxs-file-doc blue'></i>
-                    <i class='bx bxs-file-pdf red' ></i></div>
+                    <div><i className='bx bxs-file-doc blue'></i>
+                    <i className='bx bxs-file-pdf red' ></i></div>
                 </div>
                 <div className="box">
                     <h5>Avalicao:</h5>
                     <nav>
-                        <i class='bx bxs-star' ></i>
-                        <i class='bx bxs-star' ></i>
-                        <i class='bx bxs-star' ></i>
-                        <i class='bx bxs-star' ></i>
-                        <i class='bx bxs-star' ></i>
+                        <i className='bx bxs-star' ></i>
+                        <i className='bx bxs-star' ></i>
+                        <i className='bx bxs-star' ></i>
+                        <i className='bx bxs-star' ></i>
+                        <i className='bx bxs-star' ></i>
                         <span>{lastest.avaliacao}</span>
                     </nav>
                     <span>{lastest.votos} votos</span>

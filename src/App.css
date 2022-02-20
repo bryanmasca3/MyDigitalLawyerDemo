@@ -291,15 +291,15 @@ img {
   padding: 0rem 0rem 5rem 0rem;
 }
 .contract__content-data{
-  background-color: var(--thrid-color);
+  /*background-color: var(--thrid-color);*/
   padding: 2rem 2rem;
 }
 .contract__content-data h2{
     color: var(--white-color);
     font-size: 0.9rem;
     padding: 2rem 0;
-    font-weight: 900;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    font-weight: 900;    
 }
 .contract__content-box .contract__box-input{
   background-color: var(--white-color);
@@ -308,15 +308,15 @@ img {
   text-transform: lowercase;
   font-weight: 500;
 }
-.contract__content-box .contract__box-input p{
+/*.contract__content-box .contract__box-input p{
   text-align: center;
   margin: 0;
   background-color: #fad15a;
-}
+}*/
 .contract__content-box{
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1rem;
 }
 .othermodel__main-buttons.send{
     width: 50%;
