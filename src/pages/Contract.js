@@ -16,7 +16,7 @@ import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Box from '@mui/material/Box';
-
+import Swal from "sweetalert2";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -43,7 +43,7 @@ const Contract = () => {
     const [dataForo, setdataForo] = useState(null)
 
     const [value, setValue] = useState('1');
-
+    const [tabformpago, settabformpago] = useState(true)
     const [buttonactivate, setbuttonactivate] = useState(false);
 
     const handleChangeTab = (event, newValue) => {
@@ -54,14 +54,27 @@ const Contract = () => {
         initialValues: {                        
             foro: ''
         },
-        validationSchema: Yup.object({                                  
+        validationSchema: Yup.object({//Indique a cidade e o Estado de preferência das partes, para o caso do contrato ser questionado na justiça.            
+                                        //Ex: Cidade/ES
             foro: Yup.string()
-            .max(50, 'Must be 50 characters or less')
+            .max(20, 'Não deve ter um máximo de 20 caracteres')
             .required('Required')                                
         }),
-        onSubmit: values => {           
-            setdataForo(values)
-            setbuttonactivate(true)       
+        onSubmit: values => {                   
+            Swal.fire({
+                title: "¿Deseas Culminar?",
+                confirmButtonText: "Aceptar",
+                showCancelButton: true,
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    setbuttonactivate(true) 
+                    setdataForo(values)                
+                }else{
+                    //console.log("invalid")
+                }
+                });
+        
+                
         }
     }) 
     const formikDatosBanco = useFormik({
@@ -73,24 +86,28 @@ const Contract = () => {
             cpf: '',
         },
         validationSchema: Yup.object({
-                    
+            //BANCO BRADESCO S/A 
+            //AGÊNCIA: 1708
+            //CONTA CORRENTE: 3197-6
+            //BENEFICIÁRIA: BRUNA CURCI FELIX MARTINS E FREITAS (CPF: 030.407.865-47)
             banco: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .max(80, 'Não deve ter um máximo de 80 caracteres')
             .required('Required'),
             agencia: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .matches(/^[0-9]+$/, "Formato inválido")
             .required('Required'),
             conta: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .matches(/^[0-9-\s]+$/, "Formato inválido")
+            .max(25, 'Não deve ter um máximo de 25 caracteres')
             .required('Required'),
             beneficiario: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")
             .required('Required'),
             cpf: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Formato inválido")
             .required('Required'),
             
-            
+          
         }),
         onSubmit: values => {           
             setdataDatosBanco(values)
@@ -98,27 +115,34 @@ const Contract = () => {
         }
     }) 
     const formikFormaPago = useFormik({
-        initialValues: {
-                
+        initialValues: {                
             prestacoes: '',
-            datapagamento: '',
+            datapagamento:  new Date(),
             formapagamento: '',
-
         },
         validationSchema: Yup.object({          
             prestacoes: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .matches(/^[0-9]+$/, "Formato inválido")   //Ex: 2         
             .required('Required'),
-            datapagamento: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            datapagamento: Yup.date()
+            .default(() => new Date())                     
             .required('Required'),
-            formapagamento: Yup.string()
-            .max(20, 'Must be 20 characters or less')
-            .required('Required'),                        
+            formapagamento: Yup.string()          
+            .ensure()
+            .required("Required"),                        
         }),
         onSubmit: values => {           
+            console.log(values)
             setdataFormaPago(values)
-            setValue("7")       
+            //values.formapagamento?settabformpago(false)
+            if(values.formapagamento==="Transferência"){
+                setValue("7")  
+                settabformpago(true)
+            }else{
+                settabformpago(false)
+                setValue("8") 
+            }
+               
         }
     }) 
 
@@ -128,7 +152,7 @@ const Contract = () => {
         },
         validationSchema: Yup.object({          
             preco: Yup.string()
-            .matches(/^[0-9]+\,[0-9]+\.[0-9]{2}$/, "Ex: 50,20.00")
+            .matches(/^[0-9]+\,[0-9]+$/, "Formato inválido")//Qual o preço do produto?
             .required('Required'),  
             
         }),
@@ -137,7 +161,7 @@ const Contract = () => {
             setValue("6")           
         }
     }) 
-    const formikCondicionEntrega = useFormik({
+    const formikCondicionEntrega = useFormik({ //FILTRO DE no poder asignar fecha anterior
         initialValues: {
             dia: new Date(),
             horario: new Date(),
@@ -145,14 +169,15 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
           
-            dia: Yup.date()
+            dia: Yup.date()//Em que data o produto será entregue?
             .default(() => new Date())                     
             .required('Required'),
-            horario: Yup.string()
+            horario: Yup.string()//Qual horário o produto será entregue?
             .default(() => new Date())
             .required('Required'),                   
             local: Yup.string()
-            .max(30, 'Must be 30 characters or less')
+            .max(100, 'Não deve ter um máximo de 100 caracteres')// Em que local o produto será entregue?
+                                                    //Endereço
             .required('Required'),  
             
         }),
@@ -167,7 +192,8 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             objeto: Yup.string()
-            .max(50, 'Must be 50 characters or less')
+            .max(300, 'Não deve ter um máximo de 300 caracteres') //O que está sendo comercializado (qual o objeto da compra e venda?)? 
+                                                        //Por favor, descreva com o máximo de informações e detalhes possíveis.
             .required('Required'),  
         }),
         onSubmit: values => {           
@@ -187,23 +213,23 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             tenome: Yup.string()
-            .matches(/^([a-z]+\s[a-z]+)+$/, "Ex: Carlos Maximiano")
-            .max(30, 'Must be 30 characters or less')
+            .matches(/^([a-z]+\s[a-z]+)+$/, "Formato inválido")//Para quem o produto será entregue?
+            .max(30, 'Não deve ter um máximo de 30 caracteres')
             .required('Required'),
             terg: Yup.string()
-            .matches(/^[0-9]{6}\-[a-z]{2}$/, "Ex: 187876-MG")
+            .matches(/^[0-9]{6}\-[a-zA-Z]{2}$/, "Formato inválido")
             .required('Required'),
             tecpf: Yup.string()            
-            .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Ex: XXX.XXX.XXX-XX")
+            .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Formato inválido")
             .required('Required'),
             teendereco: Yup.string()
-            .max(50, 'Must be 50 characters or less')
+            .max(100, 'Não deve ter um máximo de 100 caracteres')
             .required('Required'),
             teemail: Yup.string()
-            .email('Ex: nombre@gmail.com')
+            .email("Formato inválido")
             .required('Required'),
             tetelefone: Yup.string()
-            .matches(/^\([0-9]{2}\)[0-9]{4}\-[0-9]{4}$/, "Ex: (11)4184-8994")
+            .matches(/^[0-9-()\s]+$/, "Formato inválido")
             .required('Required')
         }),
         onSubmit: values => {           
@@ -221,20 +247,21 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             donome: Yup.string()
-            .matches(/^([a-z]+\s[a-z]+)+$/, "Ex: Bruna Curci")
-            .max(30, 'Must be 30 characters or less')
+            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")
+            .max(80, 'Não deve ter um máximo de 80 caracteres')
             .required('Required'),
             docpnj: Yup.string()
-            .matches(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/(0001)\-[0-9]{2}$/, "Ex: XX.XXX.XXX/0001-XX")
+            .matches(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/(0001)\-[0-9]{2}$/, "Formato inválido")
             .required('Required'),
             doendereco: Yup.string()
-            .max(50, 'Must be 50 characters or less')
+            .max(100, 'Não deve ter um máximo de 100 caracteres')
             .required('Required'),
             doemail: Yup.string()
-            .email('Ex: nombre@gmail.com')
+            .email('Formato inválido')
             .required('Required'),
             dotelefone: Yup.string()
-            .matches(/^\([0-9]{2}\)[0-9]{4}\-[0-9]{4}$/, "Ex: (11)4184-8994")
+            .matches(/^[0-9-()\s]+$/, "Formato inválido")
+            .max(16, 'Não deve ter um máximo de 16 caracteres')
             .required('Required')
         }),
         onSubmit: values => {           
@@ -274,8 +301,8 @@ const Contract = () => {
                                     <Tab label="CONDIÇÕES DA ENTREGA" value="4"  disabled={dataObjecto?false:true}/>
                                     <Tab label="DO PREÇO" value="5"  disabled={dataCondicionEntrega?false:true}/>
                                     <Tab label="DA FORMA DE PAGAMENTO" value="6"  disabled={dataPrecio?false:true}/>
-                                    <Tab label="DADOS BANCÁRIOS" value="7"  disabled={dataFormaPago?false:true}/>
-                                    <Tab label="FORO" value="8"  disabled={dataDatosBanco?false:true}/>
+                                    <Tab label="DADOS BANCÁRIOS" value="7"  disabled={tabformpago&&dataFormaPago?false:true}/>
+                                    <Tab label="FORO" value="8"  disabled={dataDatosBanco||(dataFormaPago&&!tabformpago)?false:true}/>
                                     </TabList>
                                 </Box>
                                 <TabPanel value="1"><Contratado formik={formikContratado}></Contratado></TabPanel>

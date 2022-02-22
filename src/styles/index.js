@@ -32,9 +32,14 @@ export default StyleSheet.create({
     flexDirection:"row",    
     marginBottom:"30px"
   },
+  contentfooter:{
+    display:"flex",  
+    alignItems:"center",
+    flexDirection:"row",    
+    marginTop:"100",
+  },
   span:{
-    fontFamily:"Roboto",
-    textTransform:"uppercase",
+    fontFamily:"Roboto", 
     fontWeight:"700"
   },
   subtitle:{

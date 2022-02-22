@@ -3,8 +3,9 @@ import  Slider  from './../components/Slider.js';
 import Box from '@mui/material/Box';
 import Header from "./../components/Header.js"
 import Footer from "./../components/Footer.js"
-import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+
 import contact from './../assets/img2.png';
 import planos from './../assets/img1.png';
 import Formmessage from './../components/Formmessage.js'

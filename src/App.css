@@ -12,6 +12,8 @@
   --five-color :#f9f9f9;
   --black-color:#000;
   --white-color:#fff;
+
+  --box-shadow:0 1rem 1rem rgba(0,0,0,.05);
 }
 
 *{
@@ -305,9 +307,11 @@ img {
   background-color: var(--white-color);
   font-size: 0.5rem;
   color: #005db8;
-  text-transform: lowercase;
+  width: 100%;
+  text-transform: capitalize;  
   font-weight: 500;
 }
+
 /*.contract__content-box .contract__box-input p{
   text-align: center;
   margin: 0;
@@ -474,4 +478,94 @@ padding: 5rem 10rem;
 }
 .btn-home:hover{
   cursor: pointer;
+}
+.helperExample{
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;    
+    letter-spacing: 0.03333em;
+    text-align: left;
+    margin-top: 3px;
+    margin-right: 14px;
+    margin-bottom: 0;
+    margin-left: 14px;
+}
+.helperExample.bold{
+  font-weight: 700;
+}
+.equipe__content-main{
+  padding: 5rem 0rem;
+}
+.equipe__content{
+  color:#595959;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; 
+  text-align: left;
+
+}
+.equipe__content div{
+
+padding: 1rem;
+}
+.equipe__content-card{
+  box-shadow: var(--box-shadow);
+  font-family: 'Roboto', sans-serif;
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.equipe__content-card a{
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+  color: #004c8e;
+  text-decoration: underline;
+}
+.equipe__content img{
+
+  height: 14rem;
+  object-fit: cover;
+}
+.equipe__content h4{  
+  font-size: 1.4rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  color: var(--black-color);
+  text-align: center;
+}
+.equipe__content nav {
+  padding: 2rem 1rem;
+}
+.equipe__content nav ul{
+  list-style-type:square;
+  color: #004c8e;
+}
+.equipe__content nav ul li::marker {
+  font-size: 1.5em;
+}
+.equipe__content nav i{
+ color: #004c8e;
+ margin-right: 0.5rem;
+}
+.equipe__content nav p{
+  font-size: 0.8rem;
+  color: #595959;
+}
+.equipe__content .email-span{
+  font-weight: 900;
+  font-size: 0.7rem;
+  text-align: left;  
+  color: var(--black-color);
+}
+.equipe__content .email{
+  font-size: 0.7rem;
+  text-align: left;  
+  
+}
+.equipe__container-card{
+  padding: 0px;
 }

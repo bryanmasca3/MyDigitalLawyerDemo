@@ -8,38 +8,50 @@ import DatePicker from '@mui/lab/DatePicker';
 import TimePicker from '@mui/lab/TimePicker';
 import ruLocale from 'date-fns/locale/ru';
 const CondicionesEntrega = ({formik}) => {
-
- 
+    const today = new Date();
+    
   
     return (<form onSubmit={formik.handleSubmit}>
         <Box className="contract__content-box">
+            <div>
                                     <LocalizationProvider dateAdapter={AdapterDateFns} >
                                     <DatePicker                                    
                                         value={formik.values.dia}
                                         id="dia" 
                                         name="dia" 
-                                        label="DIA"                                         
+                                        label="DIa"       
+                                        minDate={today}                                  
                                         onChange={(val) => {                                        
                                             formik.setFieldValue('dia', val);
                                         }}
-                                        renderInput={(params) => (
-                                        <TextField {...params} helperText={params?.inputProps?.placeholder} />
+                                        renderInput={(params) => (<>
+                                           
+                                        <TextField {...params} /></>
                                         )}
                                 />
-                              
+                                  
+                                  <p className="helperExample bold">Em que data o produto será entregue?</p>
+                                  <p className="helperExample">mm/dd/yyyy</p> 
                                 </LocalizationProvider>
+                                </div>
+                                <div>
                                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
                                     <TimePicker
                                         id="horario" 
-                                        label="HORÁRIO"
-                                        name="horario"                                                                      
+                                        label="Horário"
+                                        name="horario"                                                                                                              
                                         value={formik.values.horario}
                                         onChange={(val) => {                                        
                                             formik.setFieldValue('horario', val);
                                         }}                                    
-                                        renderInput={(params) => <TextField {...params} helperText={params?.inputProps?.placeholder}/>}
+                                        renderInput={(params) =><>
+                                         
+                                            <TextField {...params} /></>}
                                         />
+                                          <p className="helperExample bold">Qual horário o produto será entregue?</p> 
+                                          <p className="helperExample">hh:mm</p> 
                                 </LocalizationProvider>
+                                </div>
                                    {/* <TextField name="dia" 
                                                className="contract__box-input" 
                                                id="dia" 
@@ -58,15 +70,19 @@ const CondicionesEntrega = ({formik}) => {
                                                onChange={formik.handleChange}
                                                error={formik.touched.horario && Boolean(formik.errors.horario)}
     helperText={formik.touched.horario && formik.errors.horario}/>*/}
+     <div>
                                     <TextField name="local" 
                                                className="contract__box-input" 
                                                id="local" 
-                                               label="LOCAL" 
+                                               label="Local" 
                                                variant="outlined"  
                                                value={formik.values.local}
                                                onChange={formik.handleChange}
                                                error={formik.touched.local && Boolean(formik.errors.local)}
-                                               helperText={!formik.touched.local||!formik.errors.local?"Ex: -":formik.touched.local && formik.errors.local}/>
+                                               helperText={formik.touched.local && formik.errors.local}/>
+                                                <p className="helperExample bold">-Em que local o produto será entregue?<br></br>
+                                                Endereço</p>
+                                                </div>
                                </Box><Box className="contract__content-box">
                                     <button className="othermodel__main-buttons send" type="submit">Proxima etapa </button>
                                 </Box></form>

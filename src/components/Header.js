@@ -42,11 +42,11 @@ const Header = () => {
         </Grid>
         <Grid item xs={6} md={6}  className="header__content-menu">
         <nav>
-            <a className="activate menu-item">Sobre Nos</a>
-            <a className="menu-item" >Planos</a>
+            <Link className="activate menu-item" to="/">Sobre Nos</Link>
+            {/*<a className="menu-item" >Planos</a>*/}
             <Link  className="menu-item" to="/contractList">Contratos</Link>
             <Link  className="menu-item" to="/advogados">Advogados</Link>
-            <a className="menu-item" >Equipe</a>
+            <Link className="menu-item" to="/equipe">Equipe</Link>
             <i className='bx bxs-user-rectangle' ></i>
         </nav>
         </Grid>
