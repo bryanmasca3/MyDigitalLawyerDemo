@@ -22,7 +22,7 @@ const DatosBancarios = ({formik}) => {
         <TextField name="agencia" 
                    className="contract__box-input"
                    id="agencia" 
-                   label="AgÊncia" 
+                   label="Agência" 
                    variant="outlined"  
                    value={formik.values.agencia}
                    onChange={formik.handleChange}
@@ -45,7 +45,7 @@ const DatosBancarios = ({formik}) => {
         <TextField name="beneficiario" 
                    className="contract__box-input"
                    id="beneficiario" 
-                   label="BeneficiÁrio" 
+                   label="Beneficiário" 
                    variant="outlined"  
                    value={formik.values.beneficiario}
                    onChange={formik.handleChange}

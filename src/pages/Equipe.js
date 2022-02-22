@@ -36,13 +36,12 @@ const Equipe = () => {
                                         <div>
                                             <h4>Bruna Curci Felix</h4>
                                             <nav>
-                                                <ul>
-                                                    <li><p>Advodaga<br></br>
-                                                Facultade de Tecnologia e Ciencias</p></li>
-                                                    <li><p>ESpecializacao:<br></br>
-                                                Direito Tributario e Direito Processual civil</p></li>
-                                                    <li><p>Experiencia em lideranca de equipe e<br></br>
-                                                conduacao de demandas estrategicas</p></li>
+                                                <ul> 
+                                                    <li><p>Advogado<br></br>
+                                                    Faculdade de Tecnologia e Ciências</p></li>
+                                                    <li><p>Especialização:<br></br>
+                                                    Direito Tributário e Direito Processual Civil</p></li>
+                                                    <li><p>Experiência em liderança de equipes e condução de demandas estratégicas</p></li>
                                                 </ul>
                                               
                                                 
@@ -67,14 +66,14 @@ const Equipe = () => {
                                         <h4>Carlos Maximiano</h4>
                                         <nav>
                                             <ul>
-                                                <li><p>Comunicacao Social<br></br>
-                                            Universidade Federal de Sao Joao del Rei - UF JS</p></li>
-                                                <li> <p>Especializacao:<br></br>
-                                            Marketing e Productor de Conteudo</p></li>
-                                                <li> <p>Experiencia como Analista de Conteudo e <br></br>
-                                            Coordenador de Comunicacao e Cultural</p></li>
+                                                <li><p>Comunicação Social<br></br>
+                                                Universidade Federal de São Joao del Rei - IF JS</p></li>
+                                                <li> <p>Especialização:<br></br>
+                                                Produtor de Marketing e Conteúdo</p></li>
+                                                <li> <p> Experiência como Analista de Conteúdo
+Coordenador de Comunicação e Cultura</p></li>
                                             </ul>
-                                   
+                                           
                                            
                                            
                                         </nav>
@@ -98,12 +97,12 @@ const Equipe = () => {
                                     <nav>
                                         <ul>
                                             <li><p>Psicologia<br></br>
-                                        Universidade Presbiteriana Mackenzie</p></li>
-                                            <li><p>Especializacao:
-                                            Reclutamiento y seleccao
+
+                                            Universidade Presbiteriana Mackenzie</p></li>
+                                            <li><p>Especialização:  <br></br>
+                                            Recrutamento e Seleção
                                         </p></li>
-                                            <li>   <p>Experiencia como Coordenador de Projetos <br></br>
-                                        e Talent Acquisition</p></li>
+                                            <li>   <p>Experiência como Coordenador de Projetos e Talento Acquisition </p></li>
                                         </ul>
                                         
                                         
@@ -128,12 +127,13 @@ const Equipe = () => {
                                         <h4>Nathalie Núñez</h4>
                                             <nav>
                                                 <ul>
-                                                    <li> <p>Ciencia da Computacao<br></br>
-                                                Universidade Catolica San Pablo</p></li>
-                                                <li> <p>Especializacao:<br></br>
-                                                Project Management Professional, Scrum Master</p></li>
-                                                <li><p>Experiencia como Team Leader e <br></br>
-                                                Engenheria de Software</p></li>
+                                                    <li> <p>Ciência da Computação
+<br></br>
+Universidade Católica de São Paulo</p></li>
+                                                <li> <p>Especialização:<br></br>
+Profissional de Gerenciamento de Projetos, Scrum Master
+                                             </p></li>
+                                                <li><p>Experiência como Team Leader e Engenharia de Software</p></li>
                                                 </ul>
                                                
                                               

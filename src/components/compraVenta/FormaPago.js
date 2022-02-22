@@ -32,7 +32,8 @@ const FormaPago = ({formik}) => {
                                         id="datapagamento" 
                                         name="datapagamento"                                         
                                         label="Data de Pagamento Prestaçâo"       
-                                        minDate={today}                                  
+                                        minDate={today}   
+                                        inputFormat="dd-MM-yyyy"                                   
                                         onChange={(val) => {                                        
                                             formik.setFieldValue('datapagamento', val);
                                         }}
@@ -42,7 +43,7 @@ const FormaPago = ({formik}) => {
                                         )}
                                 />
                                                                     
-                                  <p className="helperExample">Ex: mm/dd/yyyy</p> 
+                                  <p className="helperExample">Ex: dd/mm/yyyy</p> 
                                   </LocalizationProvider>
                                   </div>
                                   <div >  

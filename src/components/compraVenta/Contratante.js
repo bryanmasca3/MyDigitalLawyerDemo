@@ -45,7 +45,7 @@ const Contratante = ({formik}) => {
                                                  <div>  <TextField name="teendereco" 
                                                 className="contract__box-input" 
                                                 id="teendereco" 
-                                                label="EndereÇo" 
+                                                label="Endereço" 
                                                 variant="outlined"  
                                                 value={formik.values.teendereco}
                                                 onChange={formik.handleChange}

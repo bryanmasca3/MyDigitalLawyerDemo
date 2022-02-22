@@ -20,7 +20,8 @@ const CondicionesEntrega = ({formik}) => {
                                         id="dia" 
                                         name="dia" 
                                         label="DIa"       
-                                        minDate={today}                                  
+                                        minDate={today}                                           
+                                        inputFormat="dd-MM-yyyy"                               
                                         onChange={(val) => {                                        
                                             formik.setFieldValue('dia', val);
                                         }}
@@ -31,7 +32,7 @@ const CondicionesEntrega = ({formik}) => {
                                 />
                                   
                                   <p className="helperExample bold">Em que data o produto será entregue?</p>
-                                  <p className="helperExample">mm/dd/yyyy</p> 
+                                  <p className="helperExample">dd/mm/yyyy</p> 
                                 </LocalizationProvider>
                                 </div>
                                 <div>

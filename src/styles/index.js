@@ -6,9 +6,12 @@ export default StyleSheet.create({
   page: {
     display: 'flex',
     flexDirection: 'column',
+    paddingTop:"70px",
+    paddingBottom:"70px",
   },
   container:{
-    padding:"50px"
+    paddingLeft:"50px",
+    paddingRight:"50px",
   },
   subcontainer:{
     marginTop:"5px",
@@ -73,5 +76,9 @@ export default StyleSheet.create({
   },
   highlightedAfter:{
     backgroundColor:"#77d4da"
+  },
+  trick:{
+    height:"200px",
+   
   }
 })

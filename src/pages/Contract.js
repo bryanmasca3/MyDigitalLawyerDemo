@@ -62,7 +62,7 @@ const Contract = () => {
         }),
         onSubmit: values => {                   
             Swal.fire({
-                title: "¿Deseas Culminar?",
+                title: "Deseja concluir a edição do contrato?",
                 confirmButtonText: "Aceptar",
                 showCancelButton: true,
                 }).then((result) => {

@@ -46,7 +46,7 @@ const Preview = ({ dataContratado,dataContratante,dataObjecto,dataCondicionEntre
                   color:"#1a1a1a"  }}
        
       >
-        {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+        {({ loading }) => (loading ? 'Loading document...' : 'Gerar PDF')}
       </PDFDownloadLink>
     </div>
   )
@@ -76,7 +76,7 @@ const Template = ({ dataContratado,dataContratante,dataObjecto,dataCondicionEntr
           </View>
           <View style={styles.subcontainer}>
             <Text style={styles.subtitle}>CLÁUSULA SEGUNDA - CONDIÇÕES DA ENTREGA:  </Text> 
-            <Text style={styles.text}>A <Text style={styles.span}>CONTRATADA</Text> entregará o produto objeto deste contrato no dia <Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":new Date(dataCondicionEntrega.dia).toLocaleDateString()}</Text> {!dataCondicionEntrega?<Text style={styles.span}>HORÁRIO</Text>:""}<Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":new Date(dataCondicionEntrega.horario).toLocaleTimeString('en-GB').slice(0, -3)}</Text> hrs. , {!dataCondicionEntrega?<Text style={styles.span}>LOCAL</Text>:""}<Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":dataCondicionEntrega.local}</Text>.</Text>          
+            <Text style={styles.text}>A <Text style={styles.span}>CONTRATADA</Text> entregará o produto objeto deste contrato no dia <Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":new Date(dataCondicionEntrega.dia).toLocaleDateString('en-GB')}</Text>{!dataCondicionEntrega?<Text style={styles.span}>HORÁRIO</Text>:""}, <Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":new Date(dataCondicionEntrega.horario).toLocaleTimeString('en-GB').slice(0, -3)}</Text> hrs. , {!dataCondicionEntrega?<Text style={styles.span}>LOCAL</Text>:""}<Text style={!dataCondicionEntrega?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataCondicionEntrega?"__________":dataCondicionEntrega.local}</Text>.</Text>          
           </View>
           <View style={styles.subcontainer}>
             <Text style={styles.subtitle}>CLÁUSULA TERCEIRA – DO PREÇO: </Text> 
@@ -84,7 +84,7 @@ const Template = ({ dataContratado,dataContratante,dataObjecto,dataCondicionEntr
           </View>
           <View style={styles.subcontainer}>
             <Text style={styles.subtitle}>CLÁUSULA QUARTA -  DA FORMA DE PAGAMENTO</Text> 
-            <Text style={styles.text}>A <Text style={styles.span}>CONTRATANTE</Text> pagará à <Text style={styles.span}>CONTRATADA</Text> o preço indicado na cláusula terceira deste contrato, em Nº {!dataFormaPago?<Text style={styles.span}> DE PRESTAÇÕES</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":dataFormaPago.prestacoes}</Text>, em {!dataFormaPago?<Text style={styles.span}>DATA DE PAGAMENTO PRESTAÇÃO</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":new Date(dataFormaPago.formapagamento).toLocaleDateString()}</Text>.O pagamento deverá ser feito mediante {!dataFormaPago?<Text style={styles.span}>FORMA DE PAGAMENTO</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":dataFormaPago.formapagamento}</Text>, cujos dados seguem abaixo:</Text>          
+            <Text style={styles.text}>A <Text style={styles.span}>CONTRATANTE</Text> pagará à <Text style={styles.span}>CONTRATADA</Text> o preço indicado na cláusula terceira deste contrato, em Nº {!dataFormaPago?<Text style={styles.span}> DE PRESTAÇÕES</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":dataFormaPago.prestacoes}</Text>, em {!dataFormaPago?<Text style={styles.span}>DATA DE PAGAMENTO PRESTAÇÃO</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":new Date(dataFormaPago.datapagamento).toLocaleDateString('en-GB')}</Text>.O pagamento deverá ser feito mediante {!dataFormaPago?<Text style={styles.span}>FORMA DE PAGAMENTO</Text>:""}<Text style={!dataFormaPago?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataFormaPago?"__________":dataFormaPago.formapagamento}</Text>{dataFormaPago&&dataFormaPago?.formapagamento==="Transferência"?", cujos dados seguem abaixo:":"."}</Text>          
           </View>
           {dataFormaPago&&dataFormaPago?.formapagamento==="Transferência"?<View style={styles.subcontainer}>
             <Text style={styles.subtitle}>DADOS BANCÁRIOS</Text> 
@@ -106,12 +106,11 @@ const Template = ({ dataContratado,dataContratante,dataObjecto,dataCondicionEntr
             <Text style={styles.subtitle}>CLÁUSULA QUINTA: VIGÊNCIA</Text> 
             <Text style={styles.text}>As partes passam a obedecer o presente contrato a partir do momento da sua assinatura e dele se desobrigam com o fim da vigência, que corresponde a data da entrega do produto e o pagamento do preço.</Text>                
           </View>    
+          {dataFormaPago&&dataFormaPago?.formapagamento!=="Transferência"?<View style={styles.trick}></View>:null}
           <View style={styles.subcontainer}>
             <Text style={styles.subtitle}>CLÁUSULA SEXTA: FORO</Text> 
             <Text style={styles.text}>As partes elegem o foro da cidade de <Text style={!dataForo?styles.highlightedBefore:!printh?styles.highlightedAfter:""}>{!dataForo?"__________":dataForo.foro}</Text> como competente para dirimir as eventuais controvérsias oriundas do presente contrato. </Text>                
-          </View>         
-      </View>
-      <View style={styles.container}>        
+          </View>           
         <View style={styles.subcontainer}>  
              <View style={styles.contentfooter}>
                <View style={styles.box}>
@@ -138,7 +137,10 @@ const Template = ({ dataContratado,dataContratante,dataObjecto,dataCondicionEntr
                 </View> 
               </View>                 
           </View>
-        </View>
+      </View>
+     
+    
+        
       </Page>
    
     </Document>
