@@ -213,7 +213,7 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             tenome: Yup.string()
-            .matches(/^([a-z]+\s[a-z]+)+$/, "Formato inválido")//Para quem o produto será entregue?
+            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")//Para quem o produto será entregue?
             .max(30, 'Não deve ter um máximo de 30 caracteres')
             .required('Required'),
             terg: Yup.string()
