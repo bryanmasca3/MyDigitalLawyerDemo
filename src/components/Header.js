@@ -3,7 +3,9 @@ import Grid from '@mui/material/Grid';
 import {Link} from "react-router-dom";
 import './../App.css';
 import logo from './../assets/logo.png';
+import { useLocation } from 'react-router-dom';
 const Header = () => {
+    const location = useLocation(); 
     return (
         <> <Grid
         container
@@ -42,11 +44,11 @@ const Header = () => {
         </Grid>
         <Grid item xs={6} md={6}  className="header__content-menu">
         <nav>
-            <Link className="activate menu-item" to="/">Sobre Nos</Link>
+            <Link className={`${location.pathname==="/"?"activate":""} menu-item`} to="/">Sobre Nos</Link>
             {/*<a className="menu-item" >Planos</a>*/}
-            <Link  className="menu-item" to="/contractList">Contratos</Link>
-            <Link  className="menu-item" to="/advogados">Advogados</Link>
-            <Link className="menu-item" to="/equipe">Equipe</Link>
+            <Link  className={`${location.pathname==="/contractList"?"activate":""} menu-item`} to="/contractList">Contratos</Link>
+            <Link  className={`${location.pathname==="/advogados"?"activate":""} menu-item`} to="/advogados">Advogados</Link>
+            <Link className={`${location.pathname==="/equipe"?"activate":""} menu-item`} to="/equipe">Equipe</Link>
             <i className='bx bxs-user-rectangle' ></i>
         </nav>
         </Grid>
