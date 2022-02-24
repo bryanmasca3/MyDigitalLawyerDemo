@@ -1,33 +1,37 @@
 # Demo for My Digital Lawyer
-
-Este proyecto es para una startup My Digital lawyer, en esta primera etapa se realizan Documentos de 
-caracter juridico y  asesoría jurídica. La finalidad es poder generar documentos de formato PDF en funcion 
+ 
+Este proyecto es para una startup My Digital lawyer, en esta primera etapa se realizan Documentos de
+carácter jurídico y  asesoría jurídica. La finalidad es poder generar documentos de formato PDF en función
 de los datos ingresados por los clientes.
-
+ 
 ## Desarrollo
-
-La aplicacion fue creada con la libreria React y React-pdf. Utilizamos MUI para estilar la pagina web.
+ 
+La aplicación fue creada con la librería React y React-pdf. Utilizamos MUI para estimular la página web.
 ### Pre-requisitos
-Los requisitos para poder ejecutar la aplicacion en un
+Los requisitos para poder ejecutar la aplicación en un
 entorno local son tener:
-
-
+ 
+ 
 * Entorno de Ejecución: Nodejs
 * Administrador de Paquetes: NPM
-
-
+ 
+ 
 ### Instalación
-Para poder instalar y ejecutar la aplicacion es necesario ejecutar los siguientes comandos.
-
+Para poder instalar y ejecutar la aplicación es necesario ejecutar los siguientes comandos.
+ 
+Clonar el Repositorio:
+```
+git clone https://github.com/bryanmasca3/MyDigitalLawyerDemo.git
+```
 Instalar paquetes:
 ```
 npm i
 ```
-Instalar ejecutar:
+Ejecutar la Aplicación:
 ```
 npm start
 ```
 ## Despliegue
-
-La aplicacion esta desplegada en la herramienta Netlify, esto nos permite 
+ 
+La aplicación esta desplegada en la herramienta Netlify, esto nos permite
 poder acceder desde cualquier lugar.
