@@ -81,7 +81,7 @@ const Home = () => {
                          </Grid>  
                 </Grid>
             </Box>
-            <Box className="plano__container"> 
+           {/* <Box className="plano__container"> 
                 <Grid
                     container     
                     spacing={4}                
@@ -103,7 +103,7 @@ const Home = () => {
                          </Grid>  
                       
                 </Grid>
-            </Box>
+    </Box>*/}
             <Box className="mensagge__container"> 
                 <Formmessage></Formmessage>
             </Box>

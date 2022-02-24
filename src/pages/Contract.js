@@ -63,7 +63,8 @@ const Contract = () => {
         onSubmit: values => {                   
             Swal.fire({
                 title: "Deseja concluir a edição do contrato?",
-                confirmButtonText: "Aceptar",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
                 showCancelButton: true,
                 }).then((result) => {
                 if (result.isConfirmed) {
@@ -101,7 +102,7 @@ const Contract = () => {
             .max(25, 'Não deve ter um máximo de 25 caracteres')
             .required('Required'),
             beneficiario: Yup.string()
-            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")
+            .matches(/^([a-zA-Z\u00f1\u00d1]+\s[a-zA-Z\u00f1\u00d1]+)+$/, "Formato inválido")
             .required('Required'),
             cpf: Yup.string()
             .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Formato inválido")
@@ -213,11 +214,11 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             tenome: Yup.string()
-            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")//Para quem o produto será entregue?
+            .matches(/^([a-zA-Z\u00f1\u00d1]+\s[a-zA-Z\u00f1\u00d1]+)+$/, "Formato inválido")//Para quem o produto será entregue?
             .max(30, 'Não deve ter um máximo de 30 caracteres')
             .required('Required'),
             terg: Yup.string()
-            .matches(/^[0-9]{6}\-[a-zA-Z]{2}$/, "Formato inválido")
+            .matches(/^[0-9]{6}\-[a-zA-Z\u00f1\u00d1]{2}$/, "Formato inválido")
             .required('Required'),
             tecpf: Yup.string()            
             .matches(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/, "Formato inválido")
@@ -247,7 +248,7 @@ const Contract = () => {
         },
         validationSchema: Yup.object({
             donome: Yup.string()
-            .matches(/^([a-zA-Z]+\s[a-zA-Z]+)+$/, "Formato inválido")
+            .matches(/^([a-zA-Z\u00f1\u00d1]+\s[a-zA-Z\u00f1\u00d1]+)+$/, "Formato inválido")
             .max(80, 'Não deve ter um máximo de 80 caracteres')
             .required('Required'),
             docpnj: Yup.string()
